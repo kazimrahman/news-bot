@@ -36,7 +36,7 @@ def tweet_top_articles(twitter_api, articles_dict):
             print(tweet_string)
             print(len(tweet_string))
             #twitter_api.update_status(tweet_string)
-        except KeyError:
+        except (KeyError, TypeError) as e:
             continue
 
 def get_short_url(url):
