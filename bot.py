@@ -35,7 +35,7 @@ def tweet_top_articles(twitter_api, articles_dict):
             tweet_string = title + "\n" +  url + " \nSource: "+ name
             print(tweet_string)
             print(len(tweet_string))
-            #twitter_api.update_status(tweet_string)
+            twitter_api.update_status(tweet_string)
         except (KeyError, TypeError) as e:
             print(e)
             continue
@@ -51,6 +51,11 @@ def get_short_url(url):
     except KeyError:
         return KeyError
 
+def delete_all_tweets(api):
+    tweets = api.home_timeline(count=200)
+    for tweet in tweets:
+        api.destroy_status(tweet.id)
+
 def main():
     auth = tweepy.OAuthHandler(api_key, api_secret)
     auth.set_access_token(access_token, access_secret)
@@ -60,8 +65,10 @@ def main():
     newsapi = NewsApiClient(api_key=news_api_key)
 
 
-    articles = get_top_articles(newsapi)
+    #articles = get_top_articles(newsapi)
     tweet_top_articles(twitter_api, articles)
+
+    #delete_all_tweets(twitter_api)
 
 
 
