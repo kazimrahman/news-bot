@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /var/www/news-bot/
+. venv/bin/activate
+python bot.py

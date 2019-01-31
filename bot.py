@@ -31,7 +31,7 @@ def tweet_top_articles(twitter_api, articles_dict):
         try:
             title = article['title'].rsplit('-',1)[0]
             url = get_short_url(article['url'])
-            name = article['source']['name'].rsplit('.com',1)[0]
+            name = article['source']['name'].rsplit('.',1)[0]
             tweet_string = title + "\n" +  url + " \nSource: "+ name
             print(tweet_string)
             print(len(tweet_string))
@@ -65,7 +65,7 @@ def main():
     newsapi = NewsApiClient(api_key=news_api_key)
 
 
-    #articles = get_top_articles(newsapi)
+    articles = get_top_articles(newsapi)
     tweet_top_articles(twitter_api, articles)
 
     #delete_all_tweets(twitter_api)
